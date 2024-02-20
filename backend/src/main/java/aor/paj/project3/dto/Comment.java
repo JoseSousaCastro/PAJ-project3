@@ -1,4 +1,4 @@
-package aor.paj.project2.backend.dto;
+package aor.paj.project3.dto;
 
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;

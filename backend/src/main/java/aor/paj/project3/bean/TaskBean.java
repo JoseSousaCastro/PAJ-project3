@@ -1,6 +1,6 @@
-package aor.paj.project2.backend.bean;
+package aor.paj.project3.bean;
 
-import aor.paj.project2.backend.dto.Task;
+import aor.paj.project3.dto.Task;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
-package aor.paj.project2.backend.bean;
+package aor.paj.project3.bean;
 
-import aor.paj.project2.backend.dto.Retrospective;
-import aor.paj.project2.backend.dto.Comment;
+import aor.paj.project3.dto.Retrospective;
+import aor.paj.project3.dto.Comment;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;

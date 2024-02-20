@@ -1,8 +1,8 @@
-package aor.paj.project2.backend.service;
+package aor.paj.project3.service;
 
-import aor.paj.project2.backend.bean.UserBean;
-import aor.paj.project2.backend.dto.Task;
-import aor.paj.project2.backend.dto.User;
+import aor.paj.project3.bean.UserBean;
+import aor.paj.project3.dto.Task;
+import aor.paj.project3.dto.User;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;

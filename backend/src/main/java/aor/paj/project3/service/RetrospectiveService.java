@@ -1,9 +1,9 @@
-package aor.paj.project2.backend.service;
+package aor.paj.project3.service;
 
-import aor.paj.project2.backend.bean.RetrospectiveBean;
-import aor.paj.project2.backend.bean.UserBean;
-import aor.paj.project2.backend.dto.Retrospective;
-import aor.paj.project2.backend.dto.Comment;
+import aor.paj.project3.bean.RetrospectiveBean;
+import aor.paj.project3.bean.UserBean;
+import aor.paj.project3.dto.Retrospective;
+import aor.paj.project3.dto.Comment;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
