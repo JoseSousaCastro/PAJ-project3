@@ -10,7 +10,7 @@ import java.util.Iterator;
 public class TaskBean {
 
     public boolean newTask(Task task) {
-        task.generateId();
+       // task.generateId();
         task.setInitialStateId();
         return validateTask(task);
     }

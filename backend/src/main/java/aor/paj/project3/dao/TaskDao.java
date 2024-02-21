@@ -1,5 +1,4 @@
 package aor.paj.project3.dao;
-
 import aor.paj.project3.entity.TaskEntity;
 import aor.paj.project3.entity.UserEntity;
 import jakarta.ejb.Stateless;
@@ -7,18 +6,18 @@ import jakarta.persistence.NoResultException;
 import java.util.ArrayList;
 
 @Stateless
-public class TaskDao extends AbstractDao<ActivityEntity> {
+public class TaskDao extends AbstractDao<TaskEntity> {
 
     private static final long serialVersionUID = 1L;
 
-    public ActivityDao() {
-        super(ActivityEntity.class);
+    public TaskDao() {
+        super(TaskEntity.class);
     }
 
 
-    public ActivityEntity findActivityById(int id) {
+    public TaskEntity findTaskById(int id) {
         try {
-            return (ActivityEntity) em.createNamedQuery("Activity.findActivityById").setParameter("id", id)
+            return (TaskEntity) em.createNamedQuery("Task.findTaskById").setParameter("id", id)
                     .getSingleResult();
 
         } catch (NoResultException e) {
@@ -27,13 +26,12 @@ public class TaskDao extends AbstractDao<ActivityEntity> {
 
     }
 
-    public ArrayList<ActivityEntity> findActivityByUser(UserEntity userEntity) {
+    public ArrayList<TaskEntity> findTaskByUser(UserEntity userEntity) {
         try {
-            ArrayList<ActivityEntity> activityEntityEntities = (ArrayList<ActivityEntity>) em.createNamedQuery("Activity.findActivityByUser").setParameter("owner", userEntity).getResultList();
-            return activityEntityEntities;
+            ArrayList<TaskEntity> taskEntityEntities = (ArrayList<TaskEntity>) em.createNamedQuery("Task.findTaskByUser").setParameter("owner", userEntity).getResultList();
+            return taskEntityEntities;
         } catch (Exception e) {
             return null;
         }
     }
 }
-
