@@ -4,6 +4,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @XmlRootElement
 public class Task {
@@ -45,8 +46,10 @@ public class Task {
         this.id = id;
     }
 
-    public void generateId() {
-        this.id = String.valueOf(System.currentTimeMillis());
+   private long generateId() {
+        // Generate unique task ID based on current date and time
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        return currentDateTime.toEpochSecond(java.time.ZoneOffset.UTC);
     }
 
     public String getTitle() {
