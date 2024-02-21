@@ -2,14 +2,14 @@ package aor.paj.project3.dto;
 
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+
 @XmlRootElement
-public class Task {
+public class TaskDto {
     @XmlElement
-    private String id;
+    private int id;
     @XmlElement
     private String title;
     @XmlElement
@@ -35,21 +35,31 @@ public class Task {
     @XmlElement
     public static final int HIGHPRIORITY = 300;
 
-    public Task() {
+    public TaskDto() {
     }
 
-    public String getId() {
+    public TaskDto(int id, String title, String description, int stateId, int priority, LocalDate startDate, LocalDate limitDate) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.stateId = TODO;
+        this.priority = priority;
+        this.startDate = startDate;
+        this.limitDate = limitDate;
+    }
+
+    public String generateId() {
+        // Generate unique task ID based on current date and time
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        return String.valueOf(currentDateTime.toEpochSecond(java.time.ZoneOffset.UTC));
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
-    }
-
-   private long generateId() {
-        // Generate unique task ID based on current date and time
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        return currentDateTime.toEpochSecond(java.time.ZoneOffset.UTC);
     }
 
     public String getTitle() {
@@ -76,36 +86,12 @@ public class Task {
         this.stateId = stateId;
     }
 
-    public void setInitialStateId() {
-        this.stateId = TODO;
-    }
-
-    public void editStateId(int stateId) {
-        /*if (stateId != TODO && stateId != DOING && stateId != DONE) {
-            throw new IllegalArgumentException("Invalid stateId");
-        } else {*/
-        if (stateId == TODO) {
-            this.stateId = TODO;
-        } else if (stateId == DOING) {
-            this.stateId = DOING;
-        } else {
-            this.stateId = DONE;
-        }
-        //}
-    }
-
     public int getPriority() {
         return priority;
     }
 
     public void setPriority(int priority) {
-        if (priority == LOWPRIORITY) {
-            this.priority = LOWPRIORITY;
-        } else if (priority == MEDIUMPRIORITY) {
-            this.priority = MEDIUMPRIORITY;
-        } else if (priority == HIGHPRIORITY) {
-            this.priority = HIGHPRIORITY;
-        }
+        this.priority = priority;
     }
 
     public LocalDate getStartDate() {
@@ -123,5 +109,4 @@ public class Task {
     public void setLimitDate(LocalDate limitDate) {
         this.limitDate = limitDate;
     }
-
 }

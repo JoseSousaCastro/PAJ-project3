@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="task")
 @NamedQuery(name="Task.findTaskById", query="SELECT a FROM TaskEntity a WHERE a.id = :id")
-@NamedQuery(name="Task.findTaskByUser", query="SELECT a FROM TaskEntity a WHERE a.owner = :owner")
+@NamedQuery(name="Task.findTasksByUser", query="SELECT a FROM TaskEntity a WHERE a.owner = :owner")
 public class TaskEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
