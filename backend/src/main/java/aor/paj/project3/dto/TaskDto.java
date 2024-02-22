@@ -48,12 +48,6 @@ public class TaskDto {
         this.limitDate = limitDate;
     }
 
-    public String generateId() {
-        // Generate unique task ID based on current date and time
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        return String.valueOf(currentDateTime.toEpochSecond(java.time.ZoneOffset.UTC));
-    }
-
     public int getId() {
         return id;
     }

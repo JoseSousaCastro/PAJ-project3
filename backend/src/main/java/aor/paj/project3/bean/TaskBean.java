@@ -71,16 +71,7 @@ public TaskBean() {
 		return false;
 	}
 
-
-/*
-	public UserPojo getUser(String username, String password){
-
-		return null;
-	}
-
-
- */
-
+	
     private TaskDto convertTaskFromEntityToDto(TaskEntity a){
         TaskDto taskDto = new TaskDto();
         taskDto.setTitle(a.getTitle());
