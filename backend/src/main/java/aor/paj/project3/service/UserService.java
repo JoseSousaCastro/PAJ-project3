@@ -12,7 +12,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 import java.util.List;
-/*
+
 @Path("/users")
 public class UserService {
 
@@ -20,7 +20,9 @@ public class UserService {
     UserBean userBean;
     @Inject
     TaskBean taskBean;
-/*
+
+
+    /*
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
@@ -167,9 +169,13 @@ public class UserService {
         return response;
     }
 
+    */
+
 
     // «« Desta linha para baixo estão métodos das Tasks!!! »»
 
+
+    /*
     // Return all Tasks from all users
     @GET
     @Path("/{username}/tasks")
@@ -186,32 +192,30 @@ public class UserService {
             return Response.status(403).entity("Invalid Token").build();
         }
     }
-} */
-/*
+
+
+
+     */
+
+
     @POST
-    @Path("/{username}/addTask")
+    @Path("/task/addTask")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response newTask(@HeaderParam("username") String usernameHeader, @HeaderParam("password") String password, @PathParam("username") String username, TaskDto
-        task) {
-        Response response;
-        System.out.println(task);
-        if (userBean.isAuthenticated(usernameHeader, password)) {
-            if (usernameHeader.equals(username)) {
-                boolean added = userBean.addTaskToUser(username, task);
-                if (added) {
-                    response = Response.status(201).entity("Task created successfully").build();
-                } else {
-                    response = Response.status(404).entity("Impossible to create task. Verify all fields").build();
-                }
+    public Response newTask(@HeaderParam("token") String token, TaskDto task) {
+
+        if (userBean.tokenExist(token)) {
+            boolean added = taskBean.addTask(token, task);
+            if (added) {
+                return Response.status(201).entity("Task created successfully").build();
             } else {
-                response = Response.status(Response.Status.BAD_REQUEST).entity("Invalid username on path").build();
+                return Response.status(404).entity("Impossible to create task. Verify all fields").build();
             }
+
         } else {
-            response = Response.status(401).entity("Invalid credentials").build();
+            return Response.status(401).entity("Invalid credentials").build();
         }
 
-        return response;
     }
 
 
@@ -240,8 +244,8 @@ public class UserService {
         }
         return response;
     }
-*/
-    /*
+
+
     @PUT
     @Path("/{username}/tasks/{taskId}/status")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -268,8 +272,7 @@ public class UserService {
         }
         return response;
     }
-*/
-    /*
+
 
     @DELETE
     @Path("/{username}/{id}")
@@ -293,5 +296,6 @@ public class UserService {
         }
         return response;
     }
+
+     */
 }
-*/

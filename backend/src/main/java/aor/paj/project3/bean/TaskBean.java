@@ -4,6 +4,8 @@ import aor.paj.project3.dao.TaskDao;
 import aor.paj.project3.dao.UserDao;
 import aor.paj.project3.dto.TaskDto;
 import aor.paj.project3.entity.TaskEntity;
+import aor.paj.project3.entity.UserEntity;
+import aor.paj.project3.enums.TaskState;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import java.io.Serializable;
@@ -21,19 +23,17 @@ UserDao userDao;
 public TaskBean() {
 }
 
-/*
 	public boolean addTask(String token, TaskDto t) {
 		UserEntity userEntity = userDao.findUserByToken(token);
 		if(userEntity != null){
 			TaskEntity taskEntity = convertTaskFromDtoToEntity(t);
 			taskEntity.setOwner(userEntity);
+			taskEntity.setState(TaskState.TODO.getValue());
 			taskDao.persist(taskEntity);
 			return true;
 		}
 		return false;
 	}
-
- */
 
 
 	public TaskDto getTask(int id) {
