@@ -7,7 +7,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class LoginDto {
     @XmlElement
-    String username;
+    String email;
     @XmlElement
     String password;
 
@@ -16,12 +16,12 @@ public class LoginDto {
     }
 
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String username) {
+        this.email = email;
     }
 
     public String getPassword() {

@@ -2,6 +2,7 @@ package aor.paj.project3.service;
 
 import aor.paj.project3.bean.TaskBean;
 import aor.paj.project3.bean.UserBean;
+import aor.paj.project3.dto.LoginDto;
 import aor.paj.project3.dto.TaskDto;
 import aor.paj.project3.dto.UserDto;
 import jakarta.inject.Inject;
@@ -20,6 +21,32 @@ public class UserService {
     UserBean userBean;
     @Inject
     TaskBean taskBean;
+
+    @POST
+    @Path("/login")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response login(LoginDto user) {
+        String token = userBean.login(user);
+        if (token != null) {
+            return Response.status(200).entity(token).build();
+        }
+        return Response.status(403).entity("Wrong Username or Password!").build();
+    }
+
+    @POST
+    @Path("/register")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response registerUser(UserDto user){
+        if(userBean.register(user)){
+            return Response.status(200).entity("The new user is registered").build();
+        }
+        return Response.status(200).entity("There is a user with the same username or email!").build();
+    }
+}
+
+
+
 
 
     /*

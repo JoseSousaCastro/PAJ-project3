@@ -1,6 +1,7 @@
 package aor.paj.project3.bean;
 
 import aor.paj.project3.dao.UserDao;
+import aor.paj.project3.dto.LoginDto;
 import aor.paj.project3.entity.UserEntity;
 import aor.paj.project3.dto.UserDto;
 import jakarta.ejb.EJB;
@@ -18,11 +19,9 @@ public class UserBean implements Serializable {
     @EJB
     UserDao userDao;
 
-    /*
     public String login(LoginDto user) {
         UserEntity userEntity = userDao.findUserByEmail(user.getEmail());
         if (userEntity != null) {
-            c
             if (userEntity.getPassword().equals(user.getPassword())) {
                 String token = generateNewToken();
                 userEntity.setToken(token);
@@ -30,7 +29,8 @@ public class UserBean implements Serializable {
             }
         }
         return null;
-    }*/
+    }
+
 
     public boolean register(UserDto user) {
         UserEntity u = userDao.findUserByEmail(user.getEmail());
