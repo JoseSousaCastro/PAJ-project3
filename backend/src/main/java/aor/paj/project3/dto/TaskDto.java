@@ -1,5 +1,7 @@
 package aor.paj.project3.dto;
 
+import aor.paj.project3.enums.TaskPriority;
+import aor.paj.project3.enums.TaskState;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
@@ -15,34 +17,23 @@ public class TaskDto {
     @XmlElement
     private String description;
     @XmlElement
-    private int stateId;
+    private TaskState state;
     @XmlElement
-    private int priority;
+    private TaskPriority priority;
     @XmlElement
     private LocalDate startDate;
     @XmlElement
     private LocalDate limitDate;
-    @XmlElement
-    public static final int TODO = 100;
-    @XmlElement
-    public static final int DOING = 200;
-    @XmlElement
-    public static final int DONE = 300;
-    @XmlElement
-    public static final int LOWPRIORITY = 100;
-    @XmlElement
-    public static final int MEDIUMPRIORITY = 200;
-    @XmlElement
-    public static final int HIGHPRIORITY = 300;
+
 
     public TaskDto() {
     }
 
-    public TaskDto(int id, String title, String description, int stateId, int priority, LocalDate startDate, LocalDate limitDate) {
+    public TaskDto(int id, String title, String description, TaskState state, TaskPriority priority, LocalDate startDate, LocalDate limitDate) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.stateId = TODO;
+        this.state = state;
         this.priority = priority;
         this.startDate = startDate;
         this.limitDate = limitDate;
@@ -72,19 +63,19 @@ public class TaskDto {
         this.description = description;
     }
 
-    public int getStateId() {
-        return stateId;
+    public TaskState getState() {
+        return state;
     }
 
-    public void setStateId(int stateId) {
-        this.stateId = stateId;
+    public void setState(TaskState state) {
+        this.state = state;
     }
 
-    public int getPriority() {
+    public TaskPriority getPriority() {
         return priority;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(TaskPriority priority) {
         this.priority = priority;
     }
 
