@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="task")
@@ -28,9 +29,8 @@ public class TaskEntity implements Serializable {
     @Column(name="start_date", nullable = false, unique = false, updatable = false)
     private Timestamp startDate;
 
-    @CreationTimestamp
     @Column(name="end_date", nullable = true, unique = false, updatable = true)
-    private Timestamp endDate;
+    private LocalDate endDate;
 
     @Column (name="state", nullable = false, unique = true, updatable = true)
     private int state;
@@ -85,11 +85,11 @@ public class TaskEntity implements Serializable {
         this.startDate = startDate;
     }
 
-    public Timestamp getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Timestamp endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
