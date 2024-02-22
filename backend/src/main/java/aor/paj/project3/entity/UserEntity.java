@@ -47,6 +47,12 @@ public class UserEntity implements Serializable{
     @Column(name="username", nullable=false, unique = true, updatable = false)
     private String username;
 
+    @Column(name="deleted", nullable = false, unique = false, updatable = true)
+    private Boolean deleted;
+
+    @Column(name="role", nullable = false, unique = false, updatable = true)
+    private int role;
+
     @OneToMany(mappedBy = "owner")
     private Set<TaskEntity> tasks;
 
@@ -68,6 +74,14 @@ public class UserEntity implements Serializable{
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 
     public String getPassword() {
@@ -114,6 +128,10 @@ public class UserEntity implements Serializable{
         return id;
     }
 
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -130,6 +148,8 @@ public class UserEntity implements Serializable{
         this.photoURL = profilePhoto;
     }
 
-
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
 }
 

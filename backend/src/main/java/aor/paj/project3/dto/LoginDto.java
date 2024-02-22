@@ -12,7 +12,7 @@ public class LoginDto {
     String password;
 
     public LoginDto () {
-        
+
     }
 
 

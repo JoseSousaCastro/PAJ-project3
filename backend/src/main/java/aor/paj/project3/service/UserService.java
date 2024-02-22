@@ -12,7 +12,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
 @Path("/users")
 public class UserService {
 
@@ -20,7 +20,7 @@ public class UserService {
     UserBean userBean;
     @Inject
     TaskBean taskBean;
-
+/*
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
@@ -186,7 +186,7 @@ public class UserService {
             return Response.status(403).entity("Invalid Token").build();
         }
     }
-}
+} */
 /*
     @POST
     @Path("/{username}/addTask")

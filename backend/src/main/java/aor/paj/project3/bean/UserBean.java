@@ -50,7 +50,24 @@ public class UserBean implements Serializable {
         userEntity.setPhone(user.getPhone());
         userEntity.setPhotoURL(user.getPhotoURL());
         userEntity.setToken(user.getToken());
+        userEntity.setDeleted(user.getDeleted());
+        userEntity.setRole(user.getRole());
         return userEntity;
+    }
+
+    private UserDto convertUserEntitytoUserDto(UserEntity user) {
+        UserDto userDto = new UserDto();
+        userDto.setUsername(user.getUsername());
+        userDto.setPassword(user.getPassword());
+        userDto.setEmail(user.getEmail());
+        userDto.setFirstName(user.getFirstName());
+        userDto.setLastName(user.getLastName());
+        userDto.setPhone(user.getPhone());
+        userDto.setPhotoURL(user.getPhotoURL());
+        userDto.setToken(user.getToken());
+        userDto.setDeleted(user.getDeleted());
+        userDto.setRole(user.getRole());
+        return userDto;
     }
 
     private String generateNewToken() {

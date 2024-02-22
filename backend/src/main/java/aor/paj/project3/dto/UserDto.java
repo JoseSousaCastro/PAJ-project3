@@ -23,6 +23,13 @@ public class UserDto {
     private String photoURL;
     @XmlElement
     private String token;
+
+    @XmlElement
+    private int role;
+
+    @XmlElement
+    private Boolean deleted;
+
     @XmlElement
     private ArrayList<TaskDto> userTasks = new ArrayList<>(); //ser array de ids das tasks assim as tasks ficavam no json das tasks
 
@@ -39,6 +46,10 @@ public class UserDto {
         return password;
     }
 
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -47,6 +58,17 @@ public class UserDto {
         this.password = password;
     }
 
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
 
     public String getEmail() {
         return email;
