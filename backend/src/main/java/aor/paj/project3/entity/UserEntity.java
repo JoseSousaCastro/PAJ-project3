@@ -1,4 +1,4 @@
-package aor.paj.project3.Entity;
+package aor.paj.project3.entity;
 
 import java.io.Serializable;
 import java.util.Set;

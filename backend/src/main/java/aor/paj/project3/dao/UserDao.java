@@ -1,6 +1,6 @@
 package aor.paj.project3.dao;
 
-import aor.paj.project3.Entity.UserEntity;
+import aor.paj.project3.entity.UserEntity;
 import jakarta.persistence.NoResultException;
 
 public class UserDao extends AbstractDao <UserEntity> {
