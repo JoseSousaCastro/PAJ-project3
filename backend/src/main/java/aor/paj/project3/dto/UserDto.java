@@ -6,7 +6,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 
 @XmlRootElement
-public class User {
+public class UserDto {
     @XmlElement
     private String username;
     @XmlElement
@@ -22,9 +22,9 @@ public class User {
     @XmlElement
     private String photoURL;
     @XmlElement
-    private ArrayList<Task> userTasks = new ArrayList<>(); //ser array de ids das tasks assim as tasks ficavam no json das tasks
+    private ArrayList<TaskDto> userTasks = new ArrayList<>(); //ser array de ids das tasks assim as tasks ficavam no json das tasks
 
-    public User() {
+    public UserDto() {
     }
 
 
@@ -54,11 +54,11 @@ public class User {
         this.email = email;
     }
 
-    public ArrayList<Task> getUserTasks() {
+    public ArrayList<TaskDto> getUserTasks() {
         return userTasks;
     }
 
-    public void setUserTasks(ArrayList<Task> userTasks) {
+    public void setUserTasks(ArrayList<TaskDto> userTasks) {
         this.userTasks = userTasks;
     }
 

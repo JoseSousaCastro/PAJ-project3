@@ -7,19 +7,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 @XmlRootElement
-public class Retrospective {
+public class RetrospectiveDto {
     @XmlElement
     private String id;
     @XmlElement
     private String title;
     @XmlElement
     private LocalDate date;
-    private ArrayList<User> retrospectiveUsers = new ArrayList<>();
+    private ArrayList<UserDto> retrospectiveUsers = new ArrayList<>();
     @XmlElement
-    private ArrayList<Comment> retrospectiveComments = new ArrayList<>();
+    private ArrayList<CommentDto> retrospectiveComments = new ArrayList<>();
 
 
-    public Retrospective() {
+    public RetrospectiveDto() {
     }
 
     public String getId() {
@@ -51,19 +51,19 @@ public class Retrospective {
         this.date = LocalDate.now();
     }
 
-    public void addUser(User user) {
+    public void addUser(UserDto user) {
         retrospectiveUsers.add(user);
     }
 
-    public ArrayList<User> getRetrospectiveUsers() {
+    public ArrayList<UserDto> getRetrospectiveUsers() {
         return retrospectiveUsers;
     }
 
-    public void addComment(Comment comment) {
+    public void addComment(CommentDto comment) {
         retrospectiveComments.add(comment);
     }
 
-    public ArrayList<Comment> getRetrospectiveComments() {
+    public ArrayList<CommentDto> getRetrospectiveComments() {
         return retrospectiveComments;
     }
 }

@@ -1,13 +1,18 @@
-package aor.paj.project3.Entity;
+package aor.paj.project3.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Set;
 
-@Table(name = "user")
+@Entity
+@Table(name="user")
+@NamedQuery(name = "User.findUserByUsername", query = "SELECT u FROM UserEntity u WHERE u.username = :username")
+@NamedQuery(name = "User.findUserByEmail", query = "SELECT u FROM UserEntity u WHERE u.email = :email")
+@NamedQuery(name = "User.findUserByToken", query = "SELECT DISTINCT u FROM UserEntity u WHERE u.token = :token")
 public class UserEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name="email", nullable=false, unique = true, updatable = false)
@@ -24,6 +29,9 @@ public class UserEntity implements Serializable {
 
     @Column(name="username", nullable=false, unique = false, updatable = true)
     private String username;
+
+    @OneToMany(mappedBy = "owner")
+    private Set<TaskEntity> tasks;
 
     public UserEntity() {
     }
@@ -66,5 +74,13 @@ public class UserEntity implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Set<TaskEntity> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<TaskEntity> tasks) {
+        this.tasks = tasks;
     }
 }
