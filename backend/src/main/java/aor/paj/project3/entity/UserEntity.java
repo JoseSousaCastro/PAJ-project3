@@ -3,12 +3,7 @@ package aor.paj.project3.entity;
 import java.io.Serializable;
 import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="user")
@@ -17,10 +12,16 @@ import jakarta.persistence.Table;
 @NamedQuery(name = "User.findUserByToken", query = "SELECT DISTINCT u FROM UserEntity u WHERE u.token = :token")
 public class UserEntity implements Serializable{
 
+
     private static final long serialVersionUID = 1L;
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, unique = true, updatable = false)
+    private int id;
+
+
     @Column(name="email", nullable=false, unique = true, updatable = true)
     private String email;
 
@@ -109,6 +110,10 @@ public class UserEntity implements Serializable{
         return photoURL;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -124,5 +129,7 @@ public class UserEntity implements Serializable{
     public void setPhotoURL(String profilePhoto) {
         this.photoURL = profilePhoto;
     }
+
+
 }
 
