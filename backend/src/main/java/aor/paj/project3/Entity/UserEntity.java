@@ -1,5 +1,4 @@
-package aor.paj.project3.entity;
-
+package aor.paj.project3.Entity;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -40,7 +39,7 @@ public class UserEntity implements Serializable{
     private String username;
 
     @OneToMany(mappedBy = "owner")
-    private Set<ActivityEntity> activities;
+    private Set<TaskEntity> tasks;
 
 
     //default empty constructor
@@ -78,12 +77,12 @@ public class UserEntity implements Serializable{
         this.password = password;
     }
 
-    public Set<ActivityEntity> getActivities() {
-        return activities;
+    public Set<TaskEntity> getTasks() {
+        return tasks;
     }
 
-    public void setActivities(Set<ActivityEntity> activities) {
-        this.activities = activities;
+    public void setTasks(Set<TaskEntity> tasks) {
+        this.tasks = tasks;
     }
 
     public String getUsername() {

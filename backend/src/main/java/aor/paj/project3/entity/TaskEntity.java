@@ -1,4 +1,4 @@
-package aor.paj.project3.entity;
+package aor.paj.project3.Entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
