@@ -6,7 +6,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 
 @XmlRootElement
-public class User {
+public class UserDto {
     @XmlElement
     private String username;
     @XmlElement
@@ -22,9 +22,18 @@ public class User {
     @XmlElement
     private String photoURL;
     @XmlElement
-    private ArrayList<Task> userTasks = new ArrayList<>(); //ser array de ids das tasks assim as tasks ficavam no json das tasks
+    private String token;
 
-    public User() {
+    @XmlElement
+    private int role;
+
+    @XmlElement
+    private Boolean deleted;
+
+    @XmlElement
+    private ArrayList<TaskDto> userTasks = new ArrayList<>(); //ser array de ids das tasks assim as tasks ficavam no json das tasks
+
+    public UserDto() {
     }
 
 
@@ -37,6 +46,10 @@ public class User {
         return password;
     }
 
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -45,6 +58,17 @@ public class User {
         this.password = password;
     }
 
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
 
     public String getEmail() {
         return email;
@@ -54,11 +78,11 @@ public class User {
         this.email = email;
     }
 
-    public ArrayList<Task> getUserTasks() {
+    public ArrayList<TaskDto> getUserTasks() {
         return userTasks;
     }
 
-    public void setUserTasks(ArrayList<Task> userTasks) {
+    public void setUserTasks(ArrayList<TaskDto> userTasks) {
         this.userTasks = userTasks;
     }
 
@@ -95,6 +119,14 @@ public class User {
 
     public void setPhotoURL(String photoURL) {
         this.photoURL = photoURL;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override

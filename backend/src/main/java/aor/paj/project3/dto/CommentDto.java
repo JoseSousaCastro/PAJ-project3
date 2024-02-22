@@ -4,7 +4,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Comment {
+public class CommentDto {
     @XmlElement
     private String id;
     @XmlElement
@@ -21,7 +21,7 @@ public class Comment {
     public static final int IMPROVEMENTS = 300;
 
 
-    public Comment() {
+    public CommentDto() {
     }
 
     public String getId() {

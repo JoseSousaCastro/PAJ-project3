@@ -1,7 +1,7 @@
 package aor.paj.project3.bean;
 
-import aor.paj.project3.dto.Retrospective;
-import aor.paj.project3.dto.Comment;
+import aor.paj.project3.dto.RetrospectiveDto;
+import aor.paj.project3.dto.CommentDto;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
@@ -16,23 +16,23 @@ import java.util.ArrayList;
 @ApplicationScoped
 public class RetrospectiveBean {
     final String filename = "retrospectives.json";
-    private ArrayList<Retrospective> retrospectives;
+    private ArrayList<RetrospectiveDto> retrospectives;
 
     public RetrospectiveBean() {
         File f = new File(filename);
         if (f.exists()) {
             try {
                 FileReader filereader = new FileReader(f);
-                retrospectives = JsonbBuilder.create().fromJson(filereader, new ArrayList<Retrospective>() {
+                retrospectives = JsonbBuilder.create().fromJson(filereader, new ArrayList<RetrospectiveDto>() {
                 }.getClass().getGenericSuperclass());
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
         } else
-            retrospectives = new ArrayList<Retrospective>();
+            retrospectives = new ArrayList<RetrospectiveDto>();
     }
 
-    public boolean addRetrospective(Retrospective retrospective) {
+    public boolean addRetrospective(RetrospectiveDto retrospective) {
         boolean added = true;
         if (retrospective.getTitle().isBlank() && retrospective.getDate() == null) {
             added = false;
@@ -47,12 +47,12 @@ public class RetrospectiveBean {
     }
 
 
-    public boolean addCommentToRetrospective(String id, Comment comment) {
+    public boolean addCommentToRetrospective(String id, CommentDto comment) {
         boolean added = true;
         if (comment.getDescription().isBlank() && comment.getUsername() == null && !validateCommentStatus(comment)) {
             added = false;
         } else {
-            for (Retrospective a : retrospectives) {
+            for (RetrospectiveDto a : retrospectives) {
                 if (a.getId().equals(id)) {
                     comment.generateId();
                     a.addComment(comment);
@@ -63,11 +63,11 @@ public class RetrospectiveBean {
         return added;
     }
 
-    public Retrospective getRetrospective(String id) {
-        Retrospective retrospective = null;
+    public RetrospectiveDto getRetrospective(String id) {
+        RetrospectiveDto retrospective = null;
         boolean found = false;
         while (!found) {
-            for (Retrospective a : retrospectives) {
+            for (RetrospectiveDto a : retrospectives) {
                 if (a.getId().equals(id)) {
                     retrospective = a;
                     found = true;
@@ -77,13 +77,13 @@ public class RetrospectiveBean {
         return retrospective;
     }
 
-    public ArrayList<Retrospective> getRetrospectives() {
+    public ArrayList<RetrospectiveDto> getRetrospectives() {
         return retrospectives;
     }
 
-    public ArrayList<Comment> getComments(String id) {
-        ArrayList<Comment> comment = null;
-        for (Retrospective a : retrospectives) {
+    public ArrayList<CommentDto> getComments(String id) {
+        ArrayList<CommentDto> comment = null;
+        for (RetrospectiveDto a : retrospectives) {
             if (a.getId().equals(id)) {
                 comment = a.getRetrospectiveComments();
             }
@@ -91,11 +91,11 @@ public class RetrospectiveBean {
         return comment;
     }
 
-    public Comment getComment(String id, String commentId) {
-        Comment comment = null;
-        for (Retrospective a : retrospectives) {
+    public CommentDto getComment(String id, String commentId) {
+        CommentDto comment = null;
+        for (RetrospectiveDto a : retrospectives) {
             if (a.getId().equals(id)) {
-                for (Comment c : a.getRetrospectiveComments()) {
+                for (CommentDto c : a.getRetrospectiveComments()) {
                     if (c.getId().equals(commentId)) {
                         comment = c;
                     }
@@ -105,9 +105,9 @@ public class RetrospectiveBean {
         return comment;
     }
 
-    public boolean validateCommentStatus(Comment comment) {
+    public boolean validateCommentStatus(CommentDto comment) {
         boolean valid = true;
-        if (comment.getCommentStatus() != Comment.STRENGTHS && comment.getCommentStatus() != Comment.CHALLENGES && comment.getCommentStatus() != Comment.IMPROVEMENTS) {
+        if (comment.getCommentStatus() != CommentDto.STRENGTHS && comment.getCommentStatus() != CommentDto.CHALLENGES && comment.getCommentStatus() != CommentDto.IMPROVEMENTS) {
             valid = false;
         }
         return valid;

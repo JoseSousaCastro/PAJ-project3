@@ -1,8 +1,9 @@
 package aor.paj.project3.service;
 
+import aor.paj.project3.bean.TaskBean;
 import aor.paj.project3.bean.UserBean;
-import aor.paj.project3.dto.Task;
-import aor.paj.project3.dto.User;
+import aor.paj.project3.dto.TaskDto;
+import aor.paj.project3.dto.UserDto;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -10,7 +11,6 @@ import jakarta.ws.rs.core.Response;
 
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 @Path("/users")
@@ -18,11 +18,15 @@ public class UserService {
 
     @Inject
     UserBean userBean;
+    @Inject
+    TaskBean taskBean;
 
+
+    /*
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<User> getUsers() {
+    public List<UserDto> getUsers() {
         return userBean.getUsers();
     }
 
@@ -31,7 +35,7 @@ public class UserService {
     @Path("/update/{username}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateUser(@PathParam("username") String username, @HeaderParam("username") String usernameHeader, @HeaderParam("password") String password, User user) {
+    public Response updateUser(@PathParam("username") String username, @HeaderParam("username") String usernameHeader, @HeaderParam("password") String password, UserDto user) {
         Response response;
 
         if (userBean.isAuthenticated(usernameHeader, password)) {
@@ -58,7 +62,6 @@ public class UserService {
     }
 
 
-
     @GET
     @Path("/{username}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -67,7 +70,7 @@ public class UserService {
 
         if (userBean.isAuthenticated(usernameHeader, password)) {
             if (usernameHeader.equals(username)) {
-                User user = userBean.getUser(username);
+                UserDto user = userBean.getUser(username);
                 response = Response.ok().entity(user).build();
             } else {
                 response = Response.status(Response.Status.BAD_REQUEST).entity("Invalid username on path").build();
@@ -93,6 +96,7 @@ public class UserService {
         }
         return response;
     }
+
     @POST
     @Path("/logout")
     @Produces(MediaType.APPLICATION_JSON)
@@ -103,33 +107,12 @@ public class UserService {
         return Response.status(200).entity("Logout successful").build();
     }
 
-    @GET
-    @Path("/{username}/tasks")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllUsersTasks(@HeaderParam("username") String usernameHeader, @HeaderParam("password") String password, @PathParam("username") String username) {
-
-        Response response;
-
-        if (userBean.isAuthenticated(usernameHeader, password)) {
-            if (usernameHeader.equals(username)) {
-                ArrayList<Task> userTasks = userBean.getUserAndHisTasks(username);
-                userTasks.sort(Comparator.comparing(Task::getPriority,Comparator.reverseOrder()).thenComparing(Comparator.comparing(Task::getStartDate).thenComparing(Task::getLimitDate)));
-                response = Response.status(Response.Status.OK).entity(userTasks).build();
-
-            } else {
-                response = Response.status(406).entity("Invalid username on path").build();
-            }
-        } else {
-            response = Response.status(401).entity("Invalid credentials").build();
-        }
-        return response;
-    }
 
     @POST
     @Path("/register")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response registerUser(User user) {
+    public Response registerUser(UserDto user) {
         Response response;
 
         boolean isUsernameAvailable = userBean.isUsernameAvailable(user.getUsername());
@@ -161,7 +144,7 @@ public class UserService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getFirstName(@HeaderParam("username") String username, @HeaderParam("password") String password) {
         Response response;
-        User currentUser = userBean.getUser(username);
+        UserDto currentUser = userBean.getUser(username);
 
         if (!userBean.isAuthenticated(username, password)) {
             response = Response.status(401).entity("Invalid credentials").build();
@@ -176,7 +159,7 @@ public class UserService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getImage(@HeaderParam("username") String username, @HeaderParam("password") String password) {
         Response response;
-        User currentUser = userBean.getUser(username);
+        UserDto currentUser = userBean.getUser(username);
 
         if (!userBean.isAuthenticated(username, password)) {
             response = Response.status(401).entity("Invalid credentials").build();
@@ -186,35 +169,67 @@ public class UserService {
         return response;
     }
 
-    @POST
-    @Path("/{username}/addTask")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response newTask(@HeaderParam("username") String usernameHeader, @HeaderParam("password") String password, @PathParam("username") String username, Task task) {
-        Response response;
-        System.out.println(task);
-        if (userBean.isAuthenticated(usernameHeader, password)) {
-            if (usernameHeader.equals(username)) {
-                boolean added = userBean.addTaskToUser(username, task);
-                if (added) {
-                    response = Response.status(201).entity("Task created successfully").build();
-                } else {
-                    response = Response.status(404).entity("Impossible to create task. Verify all fields").build();
-                }
-            } else {
-                response = Response.status(Response.Status.BAD_REQUEST).entity("Invalid username on path").build();
-            }
-        } else {
-            response = Response.status(401).entity("Invalid credentials").build();
-        }
+    */
 
-        return response;
+
+    // «« Desta linha para baixo estão métodos das Tasks!!! »»
+
+
+
+    // Return all Tasks from user
+    @GET
+    @Path("/task/userTasks")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllUsersTasks(@HeaderParam("token") String token) {
+        if (userBean.tokenExist(token)) {
+            ArrayList<TaskDto> tasks = taskBean.getUserTasks(token);
+            return Response.status(200).entity(tasks).build();
+        } else {
+            return Response.status(403).entity("Invalid Token").build();
+        }
     }
 
+    // Return Task by Id
+    @GET
+    @Path("/task")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllUsersTasks(@HeaderParam("token") String token, @HeaderParam("taskId") int taskId) {
+        if (userBean.tokenExist(token)) {
+            TaskDto task = taskBean.getTask(taskId);
+            return Response.status(200).entity(task).build();
+        } else {
+            return Response.status(403).entity("Invalid Token").build();
+        }
+    }
+
+    // Add Task
+    @POST
+    @Path("/task/addTask")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response newTask(@HeaderParam("token") String token, TaskDto task) {
+
+        if (userBean.tokenExist(token)) {
+            boolean added = taskBean.addTask(token, task);
+            if (added) {
+                return Response.status(201).entity("Task created successfully").build();
+            } else {
+                return Response.status(404).entity("Impossible to create task. Verify all fields").build();
+            }
+
+        } else {
+            return Response.status(403).entity("Invalid Token").build();
+        }
+
+    }
+
+
+/*
     @PUT
     @Path("/{username}/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateTask(@HeaderParam("username") String usernameHeader, @HeaderParam("password") String password, @PathParam("username") String username, @PathParam("id") String id, Task task) {
+    public Response updateTask(@HeaderParam("username") String usernameHeader, @HeaderParam("password") String password, @PathParam("username") String username, @PathParam("id") String id, TaskDto
+        task) {
 
         Response response;
         if (userBean.isAuthenticated(username, password)) {
@@ -234,6 +249,7 @@ public class UserService {
         }
         return response;
     }
+
 
     @PUT
     @Path("/{username}/tasks/{taskId}/status")
@@ -285,4 +301,6 @@ public class UserService {
         }
         return response;
     }
+
+     */
 }

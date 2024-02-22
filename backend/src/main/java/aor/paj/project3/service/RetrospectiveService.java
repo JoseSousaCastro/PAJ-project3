@@ -2,8 +2,8 @@ package aor.paj.project3.service;
 
 import aor.paj.project3.bean.RetrospectiveBean;
 import aor.paj.project3.bean.UserBean;
-import aor.paj.project3.dto.Retrospective;
-import aor.paj.project3.dto.Comment;
+import aor.paj.project3.dto.RetrospectiveDto;
+import aor.paj.project3.dto.CommentDto;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -19,7 +19,7 @@ public class RetrospectiveService {
     RetrospectiveBean retrospectiveBean;
     @Inject
     UserBean userBean;
-
+/*
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
@@ -28,7 +28,7 @@ public class RetrospectiveService {
         if (!userBean.isAuthenticated(username, password)) {
             response = Response.status(401).entity("Invalid credentials").build();
         } else {
-            List<Retrospective> retrospectives = retrospectiveBean.getRetrospectives();
+            List<RetrospectiveDto> retrospectives = retrospectiveBean.getRetrospectives();
             response = Response.status(200).entity(retrospectives).build();
         }
         return response;
@@ -42,7 +42,7 @@ public class RetrospectiveService {
         if (!userBean.isAuthenticated(username, password)) {
             response = Response.status(401).entity("Invalid credentials").build();
         } else {
-            List<Comment> comments = retrospectiveBean.getComments(id);
+            List<CommentDto> comments = retrospectiveBean.getComments(id);
             if (comments == null) {
                 response = Response.status(404).entity("Retrospective with this id not found").build();
             } else {
@@ -60,7 +60,7 @@ public class RetrospectiveService {
         if (!userBean.isAuthenticated(username, password)) {
             response = Response.status(401).entity("Invalid credentials").build();
         } else {
-            Retrospective retrospective = retrospectiveBean.getRetrospective(id);
+            RetrospectiveDto retrospective = retrospectiveBean.getRetrospective(id);
             if (retrospective == null) {
                 response = Response.status(404).entity("Retrospective with this id not found").build();
             } else {
@@ -81,7 +81,7 @@ public class RetrospectiveService {
             if (id == null) {
                 response = Response.status(400).entity("Invalid retrospective id").build();
             } else {
-                Comment comment = retrospectiveBean.getComment(id, id2);
+                CommentDto comment = retrospectiveBean.getComment(id, id2);
                 if (comment == null) {
                     response = Response.status(404).entity("Comment with this id not found").build();
                 } else {
@@ -98,7 +98,7 @@ public class RetrospectiveService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addRetrospective(@HeaderParam("username") String username, @HeaderParam("password") String
-            password, Retrospective temporaryRetrospective) {
+            password, RetrospectiveDto temporaryRetrospective) {
         Response response;
         if (!userBean.isAuthenticated(username, password)) {
             response = Response.status(401).entity("Invalid credentials").build();
@@ -118,7 +118,7 @@ public class RetrospectiveService {
     @Path("/{id}/addComment")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response newComment(@HeaderParam("username") String username, @HeaderParam("password") String
-            password, @PathParam("id") String id, Comment temporaryComment) {
+            password, @PathParam("id") String id, CommentDto temporaryComment) {
         Response response;
         if (!userBean.isAuthenticated(username, password)) {
             response = Response.status(401).entity("Invalid credentials").build();
@@ -132,4 +132,6 @@ public class RetrospectiveService {
         }
         return response;
     }
+
+ */
 }
