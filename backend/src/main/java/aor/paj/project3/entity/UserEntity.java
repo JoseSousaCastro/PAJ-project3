@@ -30,11 +30,11 @@ public class UserEntity implements Serializable{
     @Column(name="lastName", nullable = false, unique = false, updatable = true)
     private String lastName;
 
-    @Column(name="phoneNumber", nullable = false, unique = false, updatable = true)
-    private String phoneNumber;
+    @Column(name="phone", nullable = false, unique = false, updatable = true)
+    private String phone;
 
     @Column(name="profilePhoto", nullable = false, unique = false, updatable = true)
-    private String profilePhoto;
+    private String photoURL;
 
 
     @Column(name="token", nullable=true, unique = true, updatable = true)
@@ -101,12 +101,12 @@ public class UserEntity implements Serializable{
         return lastName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public String getProfilePhoto() {
-        return profilePhoto;
+    public String getPhotoURL() {
+        return photoURL;
     }
 
     public void setFirstName(String firstName) {
@@ -117,12 +117,12 @@ public class UserEntity implements Serializable{
         this.lastName = lastName;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phoneNumber) {
+        this.phone = phoneNumber;
     }
 
-    public void setProfilePhoto(String profilePhoto) {
-        this.profilePhoto = profilePhoto;
+    public void setPhotoURL(String profilePhoto) {
+        this.photoURL = profilePhoto;
     }
 }
 

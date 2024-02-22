@@ -1,5 +1,88 @@
 package aor.paj.project3.bean;
 
+import aor.paj.project3.dao.UserDao;
+import aor.paj.project3.entity.UserEntity;
+import aor.paj.project3.dto.UserDto;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
+
+import java.io.Serializable;
+import java.security.SecureRandom;
+import java.util.Base64;
+
+
+
+@Stateless
+public class UserBean implements Serializable {
+
+    @EJB
+    UserDao userDao;
+
+    /*public String login(LoginDto user) {
+        UserEntity userEntity = userDao.findUserByEmail(user.getEmail());
+        if (userEntity != null) {
+            c
+            if (userEntity.getPassword().equals(user.getPassword())) {
+                String token = generateNewToken();
+                userEntity.setToken(token);
+                return token;
+            }
+        }
+        return null;
+    }*/
+
+    public boolean register(UserDto user) {
+        UserEntity u = userDao.findUserByEmail(user.getEmail());
+        if (u == null) {
+            userDao.persist(convertUserDtotoUserEntity(user));
+            return true;
+        } else
+            return false;
+    }
+
+    private UserEntity convertUserDtotoUserEntity(UserDto user) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername(user.getUsername());
+        userEntity.setPassword(user.getPassword());
+        userEntity.setEmail(user.getEmail());
+        userEntity.setFirstName(user.getFirstName());
+        userEntity.setLastName(user.getLastName());
+        userEntity.setPhone(user.getPhone());
+        userEntity.setPhotoURL(user.getPhotoURL());
+        userEntity.setToken(user.getToken());
+        return userEntity;
+    }
+
+    private String generateNewToken() {
+        SecureRandom secureRandom = new SecureRandom(); //threadsafe
+        Base64.Encoder base64Encoder = Base64.getUrlEncoder(); //threadsafe
+        byte[] randomBytes = new byte[24];
+        secureRandom.nextBytes(randomBytes);
+        return base64Encoder.encodeToString(randomBytes);
+    }
+
+    public boolean logout(String token) {
+        UserEntity u = userDao.findUserByToken(token);
+        if (u != null) {
+            u.setToken(null);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean tokenExist(String token) {
+        if (userDao.findUserByToken(token) != null)
+            return true;
+        return false;
+
+    }
+}
+
+
+
+
+/*package aor.paj.project3.bean;
+
 import aor.paj.project3.dto.TaskDto;
 import aor.paj.project3.dto.UserDto;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -234,7 +317,7 @@ public class UserBean {
         return false;
     }
 
-*/
+
 
     public void writeIntoJsonFile() {
         Jsonb jsonb = JsonbBuilder.create(new
@@ -246,4 +329,4 @@ public class UserBean {
         }
     }
 
-}
+}*/

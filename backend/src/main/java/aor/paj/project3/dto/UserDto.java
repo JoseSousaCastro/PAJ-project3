@@ -22,6 +22,8 @@ public class UserDto {
     @XmlElement
     private String photoURL;
     @XmlElement
+    private String token;
+    @XmlElement
     private ArrayList<TaskDto> userTasks = new ArrayList<>(); //ser array de ids das tasks assim as tasks ficavam no json das tasks
 
     public UserDto() {
@@ -95,6 +97,14 @@ public class UserDto {
 
     public void setPhotoURL(String photoURL) {
         this.photoURL = photoURL;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override
