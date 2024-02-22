@@ -34,7 +34,8 @@ public TaskBean() {
 		return false;
 	}
 
-*/
+ */
+
 
 	public TaskDto getTask(int id) {
 		TaskEntity taskEntity = taskDao.findTaskById(id);
