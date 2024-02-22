@@ -19,14 +19,22 @@ public class UserEntity implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
-    //user unique email has ID - not updatable, unique, not null, min size = 3
+
     @Id
-    @Column(name="email", nullable=false, unique = true, updatable = false)
+    @Column(name="email", nullable=false, unique = true, updatable = true)
     private String email;
 
-    //user's name
-    @Column(name="name", nullable=false, unique = false, updatable = true)
-    private String name;
+    @Column(name="firstName", nullable = false, unique = false, updatable = true)
+    private String firstName;
+
+    @Column(name="lastName", nullable = false, unique = false, updatable = true)
+    private String lastName;
+
+    @Column(name="phoneNumber", nullable = false, unique = false, updatable = true)
+    private String phoneNumber;
+
+    @Column(name="profilePhoto", nullable = false, unique = false, updatable = true)
+    private String profilePhoto;
 
 
     @Column(name="token", nullable=true, unique = true, updatable = true)
@@ -35,7 +43,7 @@ public class UserEntity implements Serializable{
     @Column(name="password", nullable=false, unique = false, updatable = true)
     private String password;
 
-    @Column(name="username", nullable=false, unique = false, updatable = true)
+    @Column(name="username", nullable=false, unique = true, updatable = false)
     private String username;
 
     @OneToMany(mappedBy = "owner")
@@ -51,14 +59,6 @@ public class UserEntity implements Serializable{
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getToken() {
@@ -93,6 +93,36 @@ public class UserEntity implements Serializable{
         this.username = username;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getProfilePhoto() {
+        return profilePhoto;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setProfilePhoto(String profilePhoto) {
+        this.profilePhoto = profilePhoto;
+    }
 }
 
