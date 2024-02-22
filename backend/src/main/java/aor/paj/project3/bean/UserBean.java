@@ -189,7 +189,7 @@ public class UserBean {
         }
         return userTasks;
     }
-
+/*
     public boolean addTaskToUser(String username, TaskDto temporaryTask) {
         TaskBean taskBean = new TaskBean();
         boolean done = taskBean.newTask(temporaryTask);
@@ -199,7 +199,7 @@ public class UserBean {
         }
         return done;
     }
-
+/*
     public boolean updateTask(String username, TaskDto task) {
         TaskBean taskBean = new TaskBean();
         boolean updated = false;
@@ -210,19 +210,9 @@ public class UserBean {
         }
         return updated;
     }
+*/
 
-    public boolean removeTask(String username, String id) {
-        TaskBean taskBean = new TaskBean();
-        boolean removed = false;
-
-        if (taskBean.removeTask(id, getUserAndHisTasks(username))) {
-            writeIntoJsonFile();
-            removed = true;
-        }
-
-        return removed;
-    }
-
+/*
     public boolean updateTaskStatus(String username, String taskId, int newStatus) {
 
         if (newStatus != 100 && newStatus != 200 && newStatus != 300) {
@@ -244,7 +234,7 @@ public class UserBean {
         return false;
     }
 
-
+*/
 
     public void writeIntoJsonFile() {
         Jsonb jsonb = JsonbBuilder.create(new

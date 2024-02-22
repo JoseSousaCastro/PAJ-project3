@@ -60,7 +60,6 @@ public class UserService {
     }
 
 
-
     @GET
     @Path("/{username}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -95,6 +94,7 @@ public class UserService {
         }
         return response;
     }
+
     @POST
     @Path("/logout")
     @Produces(MediaType.APPLICATION_JSON)
@@ -104,7 +104,6 @@ public class UserService {
 
         return Response.status(200).entity("Logout successful").build();
     }
-
 
 
     @POST
@@ -187,7 +186,8 @@ public class UserService {
             return Response.status(403).entity("Invalid Token").build();
         }
     }
-
+}
+/*
     @POST
     @Path("/{username}/addTask")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -215,7 +215,7 @@ public class UserService {
     }
 
 
-
+/*
     @PUT
     @Path("/{username}/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -240,7 +240,8 @@ public class UserService {
         }
         return response;
     }
-
+*/
+    /*
     @PUT
     @Path("/{username}/tasks/{taskId}/status")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -267,7 +268,8 @@ public class UserService {
         }
         return response;
     }
-
+*/
+    /*
 
     @DELETE
     @Path("/{username}/{id}")
@@ -292,3 +294,4 @@ public class UserService {
         return response;
     }
 }
+*/
