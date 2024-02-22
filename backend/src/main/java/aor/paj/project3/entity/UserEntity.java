@@ -80,6 +80,8 @@ public class UserEntity implements Serializable{
         return role;
     }
 
+
+
     public void setRole(int role) {
         this.role = role;
     }

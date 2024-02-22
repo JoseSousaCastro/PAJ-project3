@@ -12,7 +12,7 @@ import jakarta.ws.rs.core.Response;
 import java.util.List;
 
 
-@Path("/retrospective")
+/*@Path("/retrospective")
 public class RetrospectiveService {
 
     @Inject
@@ -132,4 +132,4 @@ public class RetrospectiveService {
         }
         return response;
     }
-}
+}*/
