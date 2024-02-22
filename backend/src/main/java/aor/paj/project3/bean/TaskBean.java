@@ -4,7 +4,6 @@ import aor.paj.project3.dao.TaskDao;
 import aor.paj.project3.dao.UserDao;
 import aor.paj.project3.dto.TaskDto;
 import aor.paj.project3.entity.TaskEntity;
-import aor.paj.project3.entity.UserEntity;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import java.io.Serializable;

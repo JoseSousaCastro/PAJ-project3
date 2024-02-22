@@ -3,10 +3,11 @@ package aor.paj.project3.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Set;
 
 
 @Entity
-@Table(name="category")
+@Table(name="task_category")
 @NamedQuery(name="Category.findCategoryByName", query="SELECT c FROM CategoryEntity c WHERE c.categoryName = :name")
 public class CategoryEntity implements Serializable {
 
@@ -19,6 +20,9 @@ public class CategoryEntity implements Serializable {
 
     @Column (name="name", nullable = false, unique = true, updatable = false)
     private String categoryName;
+
+    @OneToMany(mappedBy = "category")
+    private Set<TaskEntity> tasks;
 
     public CategoryEntity() {
     }

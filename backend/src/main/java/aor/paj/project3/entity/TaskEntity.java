@@ -19,10 +19,10 @@ public class TaskEntity implements Serializable {
     @Column (name="id", nullable = false, unique = true, updatable = false)
     private int id;
 
-    @Column (name="title", nullable = false, unique = true)
+    @Column (name="title", nullable = false, unique = false, length = 25)
     private String title;
 
-    @Column (name="description", nullable = true, unique = false, length = 65535, columnDefinition = "TEXT")
+    @Column (name="description", nullable = false, unique = false, length = 65535, columnDefinition = "TEXT")
     private String description;
 
     @CreationTimestamp
@@ -32,22 +32,23 @@ public class TaskEntity implements Serializable {
     @Column(name="end_date", nullable = true, unique = false, updatable = true)
     private LocalDate endDate;
 
-    @Column (name="state", nullable = false, unique = true, updatable = true)
+    @Column (name="state", nullable = false, unique = false, updatable = true)
     private int state;
 
-    @Column (name="category", nullable = false, unique = true, updatable = false)
-    private String category;
-
-    @Column (name="priority", nullable = false, unique = true, updatable = false)
+    @Column (name="priority", nullable = false, unique = false, updatable = true)
     private int priority;
 
-    @Column (name="creator", nullable = false, unique = true, updatable = false)
-    private String creatorName;
-
+    @Column(name="deleted", nullable = false, unique = false, updatable = true)
+    private Boolean deleted;
 
     //Owning Side User - Task
     @ManyToOne
     private UserEntity owner;
+
+    //Owning Side Category - Task
+    @ManyToOne
+    private CategoryEntity category;
+
 
 
     public TaskEntity() {
@@ -63,6 +64,14 @@ public class TaskEntity implements Serializable {
 
     public String getTitle() {
         return title;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 
     public void setTitle(String title) {
@@ -101,28 +110,12 @@ public class TaskEntity implements Serializable {
         this.state = state;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public int getPriority() {
         return priority;
     }
 
     public void setPriority(int priority) {
         this.priority = priority;
-    }
-
-    public String getCreatorName() {
-        return creatorName;
-    }
-
-    public void setCreatorName(String creatorName) {
-        this.creatorName = creatorName;
     }
 
     public UserEntity getOwner() {
