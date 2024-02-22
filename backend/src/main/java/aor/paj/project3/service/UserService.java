@@ -175,29 +175,34 @@ public class UserService {
     // «« Desta linha para baixo estão métodos das Tasks!!! »»
 
 
-    /*
-    // Return all Tasks from all users
+
+    // Return all Tasks from user
     @GET
-    @Path("/{username}/tasks")
+    @Path("/task/userTasks")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllUsersTasks(@HeaderParam("token") String token, @PathParam("username") String userPath) {
-        if (userBean.authenticatesToken(token)) {
-            if (userBean.isUsernameAvailable(userPath)) {
-                ArrayList<TaskDto> tasks = userBean.getUserAndHisTasks(token);
-                return Response.status(200).entity(tasks).build();
-            } else {
-                return Response.status(406).entity("Invalid username on path").build();
-            }
+    public Response getAllUsersTasks(@HeaderParam("token") String token) {
+        if (userBean.tokenExist(token)) {
+            ArrayList<TaskDto> tasks = taskBean.getUserTasks(token);
+            return Response.status(200).entity(tasks).build();
         } else {
             return Response.status(403).entity("Invalid Token").build();
         }
     }
 
+    // Return Task by Id
+    @GET
+    @Path("/task")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllUsersTasks(@HeaderParam("token") String token, @HeaderParam("taskId") int taskId) {
+        if (userBean.tokenExist(token)) {
+            TaskDto task = taskBean.getTask(taskId);
+            return Response.status(200).entity(task).build();
+        } else {
+            return Response.status(403).entity("Invalid Token").build();
+        }
+    }
 
-
-     */
-
-
+    // Add Task
     @POST
     @Path("/task/addTask")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -213,7 +218,7 @@ public class UserService {
             }
 
         } else {
-            return Response.status(401).entity("Invalid credentials").build();
+            return Response.status(403).entity("Invalid Token").build();
         }
 
     }

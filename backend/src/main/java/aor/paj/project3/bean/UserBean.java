@@ -18,7 +18,8 @@ public class UserBean implements Serializable {
     @EJB
     UserDao userDao;
 
-    /*public String login(LoginDto user) {
+    /*
+    public String login(LoginDto user) {
         UserEntity userEntity = userDao.findUserByEmail(user.getEmail());
         if (userEntity != null) {
             c

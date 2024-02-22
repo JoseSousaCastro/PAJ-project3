@@ -22,20 +22,26 @@ public class TaskDto {
     @XmlElement
     private LocalDate startDate;
     @XmlElement
-    private LocalDate limitDate;
+    private LocalDate endDate;
+    @XmlElement
+    private Boolean deleted;
+    @XmlElement
+    private String category;
 
 
     public TaskDto() {
     }
 
-    public TaskDto(int id, String title, String description, TaskState state, TaskPriority priority, LocalDate startDate, LocalDate limitDate) {
+    public TaskDto(int id, String title, String description, TaskState state, TaskPriority priority, LocalDate startDate, LocalDate endDate, Boolean deleted, String category) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.state = state;
         this.priority = priority;
         this.startDate = startDate;
-        this.limitDate = limitDate;
+        this.endDate = endDate;
+        this.deleted = deleted;
+        this.category = category;
     }
 
     public int getId() {
@@ -86,11 +92,27 @@ public class TaskDto {
         this.startDate = startDate;
     }
 
-    public LocalDate getLimitDate() {
-        return limitDate;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setLimitDate(LocalDate limitDate) {
-        this.limitDate = limitDate;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

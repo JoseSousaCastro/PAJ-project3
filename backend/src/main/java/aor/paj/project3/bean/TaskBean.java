@@ -3,6 +3,7 @@ package aor.paj.project3.bean;
 import aor.paj.project3.dao.TaskDao;
 import aor.paj.project3.dao.UserDao;
 import aor.paj.project3.dto.TaskDto;
+import aor.paj.project3.entity.CategoryEntity;
 import aor.paj.project3.entity.TaskEntity;
 import aor.paj.project3.entity.UserEntity;
 import aor.paj.project3.enums.TaskState;
@@ -27,7 +28,7 @@ public TaskBean() {
 		UserEntity userEntity = userDao.findUserByToken(token);
 		if(userEntity != null){
 			TaskEntity taskEntity = convertTaskFromDtoToEntity(t);
-			taskEntity.setOwner(userEntity);
+			taskEntity.setCreator(userEntity);
 			taskEntity.setState(TaskState.TODO.getValue());
 			taskDao.persist(taskEntity);
 			return true;
@@ -41,7 +42,7 @@ public TaskBean() {
 		return convertTaskFromEntityToDto(taskEntity);
 	}
 
-/*	public ArrayList<TaskDto> getTasks(String token) {
+	public ArrayList<TaskDto> getUserTasks(String token) {
 		UserEntity userEntity = userDao.findUserByToken(token);
 		if(userEntity != null){
 			ArrayList<TaskEntity> tasks = taskDao.findTasksByUser(userEntity);
@@ -50,12 +51,12 @@ public TaskBean() {
 		}
 		return null;
 	}
-	*/
+
 
 	public boolean removeTask(int id) {
-		TaskEntity a = taskDao.findTaskById(id);
-		if(a!=null){
-			taskDao.remove(a);
+		TaskEntity t = taskDao.findTaskById(id);
+		if(t!=null){
+			taskDao.remove(t);
 			return true;
 		}
 		return false;
@@ -66,6 +67,11 @@ public TaskBean() {
 		if(t!= null){
 			t.setTitle(taskDto.getTitle());
 			t.setDescription(taskDto.getDescription());
+			t.setEndDate(taskDto.getEndDate());
+			t.setState(taskDto.getState().getValue());
+			t.setPriority(taskDto.getPriority().getValue());
+			t.setDeleted(taskDto.getDeleted());
+			//t.setCategory(CategoryEntity.getCategoryName());
 			return true;
 		}
 		return false;

@@ -43,7 +43,7 @@ public class TaskEntity implements Serializable {
 
     //Owning Side User - Task
     @ManyToOne
-    private UserEntity owner;
+    private UserEntity creator;
 
     //Owning Side Category - Task
     @ManyToOne
@@ -118,12 +118,20 @@ public class TaskEntity implements Serializable {
         this.priority = priority;
     }
 
-    public UserEntity getOwner() {
-        return owner;
+    public UserEntity getCreator() {
+        return creator;
     }
 
-    public void setOwner(UserEntity owner) {
-        this.owner = owner;
+    public void setCreator(UserEntity creator) {
+        this.creator = creator;
+    }
+
+    public CategoryEntity getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryEntity category) {
+        this.category = category;
     }
 }
 

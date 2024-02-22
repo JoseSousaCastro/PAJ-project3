@@ -19,7 +19,7 @@ public class RetrospectiveService {
     RetrospectiveBean retrospectiveBean;
     @Inject
     UserBean userBean;
-
+/*
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
@@ -132,4 +132,6 @@ public class RetrospectiveService {
         }
         return response;
     }
+
+ */
 }

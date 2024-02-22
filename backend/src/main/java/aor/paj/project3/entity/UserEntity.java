@@ -53,7 +53,7 @@ public class UserEntity implements Serializable{
     @Column(name="role", nullable = false, unique = false, updatable = true)
     private int role;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "creator")
     private Set<TaskEntity> tasks;
 
 
