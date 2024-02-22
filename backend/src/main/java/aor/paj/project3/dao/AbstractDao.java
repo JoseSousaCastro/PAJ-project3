@@ -17,6 +17,7 @@ public abstract class AbstractDao<T extends Serializable> implements Serializabl
     private final Class<T> clazz;
     @PersistenceContext(unitName = "PersistenceUnit")
     protected EntityManager em;
+
     public AbstractDao(Class<T> clazz)
     {
         this.clazz = clazz;
