@@ -43,7 +43,7 @@ public class UserService {
         }
         return Response.status(200).entity("There is a user with the same username or email!").build();
     }
-}
+
 
 
 
@@ -251,9 +251,9 @@ public class UserService {
         }
 
     }
-
-
+    */
 /*
+
     @PUT
     @Path("/{username}/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -279,7 +279,7 @@ public class UserService {
         return response;
     }
 
-
+*/
     @PUT
     @Path("/{username}/tasks/{taskId}/status")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -307,7 +307,7 @@ public class UserService {
         return response;
     }
 
-
+/*
     @DELETE
     @Path("/{username}/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -335,3 +335,4 @@ public class UserService {
 }
 
  */
+}

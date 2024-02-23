@@ -96,7 +96,7 @@ public TaskBean() {
     }
 
     private ArrayList<TaskDto> convertTaskFromEntityListToDtoList(ArrayList<TaskEntity> taskEntityEntities){
-        ArrayList<TaskDto> taskDtos = new ArrayList<TaskDto>();
+        ArrayList<TaskDto> taskDtos = new ArrayList<>();
         for(TaskEntity t : taskEntityEntities){
             taskDtos.add(convertTaskFromEntityToDto(t));
         }
