@@ -202,7 +202,7 @@ public class UserService {
     // «« Desta linha para baixo estão métodos das Tasks!!! »»
 
 
-
+/*
     // Return all Tasks from user
     @GET
     @Path("/task/userTasks")
@@ -215,6 +215,8 @@ public class UserService {
             return Response.status(403).entity("Invalid Token").build();
         }
     }
+
+
 
     // Return Task by Id
     @GET
@@ -329,5 +331,7 @@ public class UserService {
         return response;
     }
 
-     */
+
 }
+
+ */
